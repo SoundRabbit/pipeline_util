@@ -1,6 +1,6 @@
 [package]
 name = "pipeline_util"
 version = "0.1.0"
-authors = ["neu <neu1neu9neu9neu9neu@gmail.com>"]
+authors = ["neunyan"]
 
 [dependencies]
