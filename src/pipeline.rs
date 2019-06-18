@@ -1,20 +1,16 @@
 pub trait Process<I, O> {
-    fn apply(&self, I) -> O;
+    fn adaptor(&self, I) -> O;
 }
 
-pub struct Adaptor<T> {
+pub struct Data<T> {
     data: T,
 }
 
-impl<T> Adaptor<T> {
-    pub fn new(data: T) -> Adaptor<T> {
-        Adaptor {
-            data: data
-        }
-    }
+impl<T> Data<T> {
+    pub fn new(data: T) -> Data<T> {unimplemented!();}
 
-    pub fn adapt<P, O>(self, process: P) -> Adaptor<O>
-        where P: Process<T, O> {
-        Adaptor::new(process.apply(self.data))
+    pub fn adapt<P, O>(self, process: P) -> Data<O>
+        where P: Fn(T) -> O {
+        unimplemented!();
     }
 }
