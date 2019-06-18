@@ -13,6 +13,6 @@ impl<T> Data<T> {
     where
         P: Fn(T) -> O,
     {
-        unimplemented!();
+        Data::new(process(self.data))
     }
 }

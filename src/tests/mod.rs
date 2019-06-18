@@ -1,4 +1,4 @@
-use ::pipeline;
+use pipeline;
 
 #[test]
 fn it_works() {
@@ -13,7 +13,9 @@ fn data_new_u32vec() {
 #[test]
 fn data_adapt_closure_u32vec_to_u32() {
     assert_eq!(
-        pipeline::Data::new(vec![1, 2, 3]).adapt(|v: Vec<u32>| {v[0]}).data,
+        pipeline::Data::new(vec![1, 2, 3])
+            .adapt(|v: Vec<u32>| { v[0] })
+            .data,
         1
     );
 }
