@@ -15,8 +15,15 @@ impl<T> Data<T> {
     {
         Data::new(process(self.data))
     }
+
+    pub fn adapt<P, O>(self, processor: P) -> Data<O>
+    where
+        P: Processor<T, O>,
+    {
+        Data::new(processor.process(self.data))
+    }
 }
 
-pub trait Process<I, O> {
+pub trait Processor<I, O> {
     fn process(&self, input: I) -> O;
 }
