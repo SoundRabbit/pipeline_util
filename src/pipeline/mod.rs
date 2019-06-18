@@ -16,3 +16,7 @@ impl<T> Data<T> {
         Data::new(process(self.data))
     }
 }
+
+pub trait Process<I, O> {
+    fn process(&self, input: I) -> O;
+}
