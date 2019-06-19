@@ -9,13 +9,6 @@ impl<T> Data<T> {
         Data { data }
     }
 
-    pub fn adapt<P, O>(self, process: P) -> Data<O>
-    where
-        P: Fn(T) -> O,
-    {
-        Data::new(process(self.data))
-    }
-
     pub fn adapt<P, O>(self, processor: P) -> Data<O>
     where
         P: Processor<T, O>,
@@ -26,4 +19,29 @@ impl<T> Data<T> {
 
 pub trait Processor<I, O> {
     fn process(&self, input: I) -> O;
+}
+
+pub struct Process<I, O, P: Fn(I)->O>
+{
+    process_impl: P,
+}
+
+impl<P> Process<P>
+where
+    P: Fn(I) -> O,
+{
+    pub fn new(process: P) -> Process<P> {
+        Process {
+            process_impl: process,
+        }
+    }
+}
+
+impl<P, I, O> Processor<I, O> for Process<P>
+where
+    P: Fn(I) -> O,
+{
+    fn process(&self, input: I) -> O {
+        self.process_impl(input)
+    }
 }
